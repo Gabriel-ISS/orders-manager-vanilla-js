@@ -26,7 +26,7 @@
           type="text"
           id="code"
           name="code"
-          placeholder="Código"
+          required
         />
         <label class="label" for="product-name">Nombre</label>
         <input
@@ -34,43 +34,43 @@
           type="text"
           id="product-name"
           name="product-name"
-          placeholder="Nombre"
+          required
         />
         <label class="label" for="price">Precio</label>
         <input
           class="input"
-          type="text"
+          type="number"
           id="price"
           name="price"
-          placeholder="Precio"
+          required
         />
         <label class="label" for="iva">Porcentaje de IVA</label>
         <input
           class="input"
-          type="text"
+          type="number"
           id="iva"
           name="iva"
-          placeholder="Porcentaje de IVA"
+          required
         />
         <label class="label" for="quantity">Cantidad</label>
         <input
           class="input"
-          type="text"
+          type="num"
           id="quantity"
           name="quantity"
-          placeholder="Cantidad"
+          required
         />
       </div>
 
       <fieldset class="fieldset">
         <legend class="fieldset__legend">Datos del cliente</legend>
-        <label class="label" for="ruc">RUC/CI</label>
+        <label class="label" for="ruc">RUC o CI</label>
         <input
           class="input"
           type="text"
           id="ruc"
           name="ruc"
-          placeholder="RUC/CI"
+          required
         />
         <label class="label" for="name">Razón Social</label>
         <input
@@ -78,7 +78,7 @@
           type="text"
           id="name"
           name="name"
-          placeholder="Razón Social"
+          required
         />
         <label class="label" for="address">Dirección</label>
         <input
@@ -86,7 +86,7 @@
           type="text"
           id="address"
           name="address"
-          placeholder="Dirección"
+          required
         />
       </fieldset>
       <button class="button" type="submit">
