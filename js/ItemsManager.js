@@ -4,6 +4,10 @@ class ItemsManager {
   totalIva = 0;
   items = [];
 
+  get totalAndIva() {
+    return this.total + this.totalIva;
+  }
+
   /**
    * Agregar un item al manager
    * @param {{
@@ -31,6 +35,7 @@ class ItemsManager {
    *   },
    *   total: number,
    *   totalIva: number,
+   *   totalAndIva: number,
    * }}
    */
   add(item) {
@@ -44,6 +49,7 @@ class ItemsManager {
       ...item,
       total: totalItem,
       totalIva: totalItemIva,
+      totalAndIva: totalItem + totalItemIva,
     };
 
     this.items.push(newItem);

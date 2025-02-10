@@ -7,6 +7,7 @@ const $form = $("form");
 const $items = $("items");
 const $total = $("total");
 const $totalIva = $("total-iva");
+const $totalAndIva = $("total-and-iva");
 
 // Inputs del pedido
 const $codeInput = $("code");
@@ -44,6 +45,8 @@ $form.addEventListener("submit", (e) => {
   // Actualizar datos en la interfaz
   $total.innerHTML = guaraniFormatter.format(ItemsManager.total);
   $totalIva.innerHTML = guaraniFormatter.format(ItemsManager.totalIva);
+  $totalAndIva.innerHTML = guaraniFormatter.format(ItemsManager.totalAndIva);
+
 
   $items.innerHTML += `
     <tr class="table__body__row">
@@ -54,6 +57,7 @@ $form.addEventListener("submit", (e) => {
       <td class="table__body__cell table__cell--numeric">${guaraniFormatter.format(newItem.total)}</td>
       <td class="table__body__cell table__cell--numeric">${item.iva}</td>
       <td class="table__body__cell table__cell--numeric">${guaraniFormatter.format(newItem.totalIva)}</td>
+      <td class="table__body__cell table__cell--numeric">${guaraniFormatter.format(newItem.totalAndIva)}</td>
       <td class="table__body__cell">${item.client.ruc}</td>
     </tr>
   `;
