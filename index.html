@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Administrador de pedidos</title>
+    <link rel="stylesheet" href="./css/main.css" />
+  </head>
+  <body>
+    <h1>Administrador de pedidos</h1>
+    <p class="centered_text">
+      Este proyecto incluye todos los requisitos mencionados en
+      <a href="assets/instructions.pdf" target="_blank">las instrucciones</a>.
+    </p>
+    <p class="centered_text">
+      Se asume que con "cargar en memoria" no se habla de localStorage ni
+      sessionStorage, sino de la memoria de javascript.
+    </p>
+    <h2>Ingrese los datos del pedido</h2>
+
+    <form id="form" class="form order__form">
+      <div>
+        <label class="label" for="code">Código</label>
+        <input
+          class="input"
+          type="text"
+          id="code"
+          name="code"
+          placeholder="Código"
+        />
+        <label class="label" for="product-name">Nombre</label>
+        <input
+          class="input"
+          type="text"
+          id="product-name"
+          name="product-name"
+          placeholder="Nombre"
+        />
+        <label class="label" for="price">Precio</label>
+        <input
+          class="input"
+          type="text"
+          id="price"
+          name="price"
+          placeholder="Precio"
+        />
+        <label class="label" for="iva">Porcentaje de IVA</label>
+        <input
+          class="input"
+          type="text"
+          id="iva"
+          name="iva"
+          placeholder="Porcentaje de IVA"
+        />
+        <label class="label" for="quantity">Cantidad</label>
+        <input
+          class="input"
+          type="text"
+          id="quantity"
+          name="quantity"
+          placeholder="Cantidad"
+        />
+      </div>
+
+      <fieldset class="fieldset">
+        <legend class="fieldset__legend">Datos del cliente</legend>
+        <label class="label" for="ruc">RUC/CI</label>
+        <input
+          class="input"
+          type="text"
+          id="ruc"
+          name="ruc"
+          placeholder="RUC/CI"
+        />
+        <label class="label" for="name">Razón Social</label>
+        <input
+          class="input"
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Razón Social"
+        />
+        <label class="label" for="address">Dirección</label>
+        <input
+          class="input"
+          type="text"
+          id="address"
+          name="address"
+          placeholder="Dirección"
+        />
+      </fieldset>
+      <button class="button" type="submit">
+        Guardar pedido
+      </button>
+    </form>
+
+    <table class="table">
+      <caption class="table__caption">
+        Pedidos
+      </caption>
+      <thead>
+        <tr>
+          <th class="table__header__cell">Código</th>
+          <th class="table__header__cell">Nombre</th>
+          <th class="table__header__cell">Precio</th>
+          <th class="table__header__cell">Cantidad</th>
+          <th class="table__header__cell">Total</th>
+          <th class="table__header__cell">Porcentaje de IVA</th>
+          <th class="table__header__cell">Total IVA</th>
+          <th class="table__header__cell">Cliente</th>
+        </tr>
+      </thead>
+      <tbody id="items"></tbody>
+      <tfoot>
+        <tr>
+          <td class="table__footer__cell totals_cell" colspan="4">TOTALES</td>
+          <td class="table__footer__cell table__cell--numeric" id="total">0</td>
+          <td></td>
+          <td class="table__footer__cell table__cell--numeric" id="total-iva">
+            0
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </body>
+  <script type="module" src="js/main.js"></script>
+</html>
