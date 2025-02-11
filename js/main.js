@@ -2,6 +2,7 @@ import { guaraniFormatter } from "./guaraniFormatter.js";
 import { $ } from "./helpers.js";
 import ItemsManager from "./ItemsManager.js";
 import ClientsDB from "./ClientsDB.js";
+import { infoIcon } from "./icons.js";
 
 const $form = $("form");
 const $items = $("items");
@@ -58,9 +59,18 @@ $form.addEventListener("submit", (e) => {
       <td class="table__body__cell table__cell--numeric">${item.iva}</td>
       <td class="table__body__cell table__cell--numeric">${guaraniFormatter.format(newItem.totalIva)}</td>
       <td class="table__body__cell table__cell--numeric">${guaraniFormatter.format(newItem.totalAndIva)}</td>
-      <td class="table__body__cell">${item.client.ruc}</td>
+      <td class="table__body__cell">
+        <div class="table__body__cell__client">
+          ${item.client.ruc}
+          <button class="icon" id="client-info-button-${item.client.ruc}">
+            ${infoIcon}
+          </button>
+        </div>
+      </td>
     </tr>
   `;
+
+  setClientInfoEventListener(item.client.ruc);
 
   // Guardar cliente
   ClientsDB.add(item.client);
@@ -83,3 +93,12 @@ $rucInput.addEventListener("input", (e) => {
     $addressInput.value = client.address;
   }
 });
+
+// Mostrar información del cliente
+function setClientInfoEventListener(clientId) {
+  const $clientInfoButton = $(`client-info-button-${clientId}`);
+  $clientInfoButton.addEventListener("click", (e) => {
+    const client = ClientsDB.getById(clientId);
+    alert(`RUC/ID: ${client.ruc}\nNombre: ${client.name}\nDirección: ${client.address}`);
+  }); 
+}

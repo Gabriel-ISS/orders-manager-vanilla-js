@@ -28,7 +28,7 @@
 
 .table__body__cell {
   padding: 0.5rem;
-  vertical-align: top;
+  vertical-align: center;
   border-bottom: 1px solid var(--border-color);
 }
 

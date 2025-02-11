@@ -39,6 +39,28 @@ h1, h2 {
   padding-inline: 1rem;
 }
 
+.table__body__cell__client {
+  display: flex;
+  align-items: center;
+}
+
+.table__body__cell__client button {
+  border: none;
+  background: none;
+  padding: 0;
+  margin-left: 0.5rem;
+  opacity: 0.5;
+}
+
+.table__body__cell__client button:hover {
+  opacity: 1;
+}
+
+.icon svg{
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
 .totals_cell {
   font-size: 1.2rem;
 }
