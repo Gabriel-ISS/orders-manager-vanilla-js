@@ -3,12 +3,14 @@ import { $ } from "./helpers.js";
 import ItemsManager from "./ItemsManager.js";
 import ClientsDB from "./ClientsDB.js";
 import { infoIcon } from "./icons.js";
+import { exampleItems } from "./example-data.js";
 
 const $form = $("form");
 const $items = $("items");
 const $total = $("total");
 const $totalIva = $("total-iva");
 const $totalAndIva = $("total-and-iva");
+const $autoFillFormBtn = $("autofill-form-btn");
 
 // Inputs del pedido
 const $codeInput = $("code");
@@ -49,28 +51,35 @@ $form.addEventListener("submit", (e) => {
   $totalAndIva.innerHTML = guaraniFormatter.format(ItemsManager.totalAndIva);
 
 
-  $items.innerHTML += `
-    <tr class="table__body__row">
-      <td class="table__body__cell">${item.code}</td>
-      <td class="table__body__cell">${item.name}</td>
-      <td class="table__body__cell table__cell--numeric">${item.price}</td>
-      <td class="table__body__cell table__cell--numeric">${item.quantity}</td>
-      <td class="table__body__cell table__cell--numeric">${guaraniFormatter.format(newItem.total)}</td>
-      <td class="table__body__cell table__cell--numeric">${item.iva}</td>
-      <td class="table__body__cell table__cell--numeric">${guaraniFormatter.format(newItem.totalIva)}</td>
-      <td class="table__body__cell table__cell--numeric">${guaraniFormatter.format(newItem.totalAndIva)}</td>
-      <td class="table__body__cell">
-        <div class="table__body__cell__client">
-          ${item.client.ruc}
-          <button class="icon" id="client-info-button-${item.client.ruc}">
-            ${infoIcon}
-          </button>
-        </div>
-      </td>
-    </tr>
+  const clientInfoBtnId = `client-info-button-${Date.now()}`;
+
+  // Crear fila
+  const $row = document.createElement("tr");
+  $row.classList.add("table__body__row");
+  $row.innerHTML = `
+    <td class="table__body__cell">${item.code}</td>
+    <td class="table__body__cell">${item.name}</td>
+    <td class="table__body__cell table__cell--numeric">${item.price}</td>
+    <td class="table__body__cell table__cell--numeric">${item.quantity}</td>
+    <td class="table__body__cell table__cell--numeric">${guaraniFormatter.format(newItem.total)}</td>
+    <td class="table__body__cell table__cell--numeric">${item.iva}</td>
+    <td class="table__body__cell table__cell--numeric">${guaraniFormatter.format(newItem.totalIva)}</td>
+    <td class="table__body__cell table__cell--numeric">${guaraniFormatter.format(newItem.totalAndIva)}</td>
+    <td class="table__body__cell">
+      <div class="table__body__cell__client">
+        ${item.client.ruc}
+        <button class="icon" id="${clientInfoBtnId}">
+          ${infoIcon}
+        </button>
+      </div>
+    </td>
   `;
 
-  setClientInfoEventListener(item.client.ruc);
+  // agregar fila a la tabla
+  $items.appendChild($row);
+
+  // Acer que el botón de info del cliente funcione
+  setClientInfoEventListener(item.client.ruc, clientInfoBtnId);
 
   // Guardar cliente
   ClientsDB.add(item.client);
@@ -94,11 +103,23 @@ $rucInput.addEventListener("input", (e) => {
   }
 });
 
-// Mostrar información del cliente
-function setClientInfoEventListener(clientId) {
-  const $clientInfoButton = $(`client-info-button-${clientId}`);
+function setClientInfoEventListener(clientId, elementId) {
+  const $clientInfoButton = $(elementId);
   $clientInfoButton.addEventListener("click", (e) => {
     const client = ClientsDB.getById(clientId);
     alert(`RUC/ID: ${client.ruc}\nNombre: ${client.name}\nDirección: ${client.address}`);
   }); 
 }
+
+// Auto rellenar formulario
+$autoFillFormBtn.addEventListener("click", (e) => {
+  const randomItem = exampleItems[Math.floor(Math.random() * exampleItems.length)];
+  $codeInput.value = randomItem.code;
+  $productNameInput.value = randomItem.name;
+  $priceInput.value = randomItem.price;
+  $ivaInput.value = randomItem.iva;
+  $quantityInput.value = randomItem.quantity;
+  $rucInput.value = randomItem.client.ruc;
+  $nameInput.value = randomItem.client.name;
+  $addressInput.value = randomItem.client.address;
+});
