@@ -21,7 +21,7 @@
     <form class="form order__form" id="form" autocomplete="off">
       <div>
         <label class="label" for="code">Código</label>
-        <input class="input" type="text" id="code" name="code" required />
+        <input class="input" type="text" id="code" name="code" required max="50"/>
         <label class="label" for="product-name">Nombre</label>
         <input
           class="input"
@@ -29,11 +29,13 @@
           id="product-name"
           name="product-name"
           required
+          min="3"
+          max="100"
         />
         <label class="label" for="price">Precio</label>
         <input class="input" type="number" id="price" name="price" required />
         <label class="label" for="iva">Porcentaje de IVA</label>
-        <input class="input" type="number" id="iva" name="iva" required />
+        <input class="input" type="number" id="iva" name="iva" required max="100" />
         <label class="label" for="quantity">Cantidad</label>
         <input
           class="input"
@@ -48,13 +50,13 @@
         <legend class="fieldset__legend">Datos del cliente</legend>
         <label class="label" for="ruc">RUC o CI</label>
         <div class="input_with_suggestions_container">
-          <input class="input" type="text" id="ruc" name="ruc" required />
+          <input class="input" type="text" id="ruc" name="ruc" required min="3" max="10"/>
           <div id="suggestions" class="input__suggestions"></div>
         </div>
         <label class="label" for="name">Razón Social</label>
-        <input class="input" type="text" id="name" name="name" required />
+        <input class="input" type="text" id="name" name="name" required min="4" max="50" />
         <label class="label" for="address">Dirección</label>
-        <input class="input" type="text" id="address" name="address" required />
+        <input class="input" type="text" id="address" name="address" required min="10" max="100" />
       </fieldset>
       <button class="button" type="submit">Guardar pedido</button>
 
