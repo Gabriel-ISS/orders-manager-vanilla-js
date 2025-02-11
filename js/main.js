@@ -11,6 +11,7 @@ const $total = $("total");
 const $totalIva = $("total-iva");
 const $totalAndIva = $("total-and-iva");
 const $autoFillFormBtn = $("autofill-form-btn");
+const $suggestions = $("suggestions");
 
 // Inputs del pedido
 const $codeInput = $("code");
@@ -95,12 +96,24 @@ $form.addEventListener("submit", (e) => {
 
 // Auto-completar cliente
 $rucInput.addEventListener("input", (e) => {
-  const client = ClientsDB.getById(e.target.value);
+  $suggestions.innerHTML = "";
 
-  if (client) {
-    $nameInput.value = client.name;
-    $addressInput.value = client.address;
-  }
+  if (!e.target.value) return;
+
+  const coincidences = ClientsDB.clients.filter((client) => client.ruc.startsWith(e.target.value));
+
+  coincidences.slice(0, 5).forEach((coincidence) => {
+    const $suggestion = document.createElement("button");
+    $suggestion.classList.add("input__suggestion");
+    $suggestion.innerText = coincidence.ruc;
+    $suggestion.addEventListener("click", (e) => {
+      $rucInput.value = coincidence.ruc;
+      $nameInput.value = coincidence.name;
+      $addressInput.value = coincidence.address;
+      $suggestions.innerHTML = "";
+    });
+    $suggestions.appendChild($suggestion);
+  });
 });
 
 function setClientInfoEventListener(clientId, elementId) {

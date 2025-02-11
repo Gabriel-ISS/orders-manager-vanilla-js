@@ -1,5 +1,12 @@
 /** Almacena todos los clientes registrados usando el ruc como identificador */
 class ClientsDB {
+  /**
+   * @type {{
+   *   ruc: string,
+   *   name: string,
+   *   address: string,
+   * }[]}
+   */
   clients = [];
 
   /**
@@ -12,6 +19,9 @@ class ClientsDB {
    * @returns {void}
    */
   add(client) {
+    if (this.clients.find((c) => c.ruc === client.ruc)) {
+      return;
+    }
     this.clients.push(client);
   }
 
@@ -22,7 +32,7 @@ class ClientsDB {
    *   ruc: string,
    *   name: string,
    *   address: string,
-   * }]}
+   * }] | undefined}
    */
   getById(id) {
     return this.clients.find((client) => client.ruc === id);

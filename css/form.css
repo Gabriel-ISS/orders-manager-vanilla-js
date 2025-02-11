@@ -31,6 +31,39 @@
   box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
+.input_with_suggestions_container {
+  position: relative;
+}
+
+.input__suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background-color: var(--background-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 0 0 var(--border-radius) var(--border-radius);
+}
+
+.input__suggestions:empty {
+  display: none;
+}
+
+.input__suggestion {
+  padding: 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  border: none;
+  width: 100%;
+}
+
+.input__suggestion:hover {
+  background-color: var(--background-secondary);
+}
+
 .fieldset {
   margin-bottom: 1rem;
 }
